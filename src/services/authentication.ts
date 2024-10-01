@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import Account from './models/Account';
+import Account from '../models/Account';
 
 async function hashPassword(password: string) {
     const salt = await bcrypt.genSalt(12);
@@ -17,7 +17,7 @@ async function generateToken(account: Account) {
         role: account.role
     };
 
-    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
+    return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1d' });
 }
 
 async function authenticate(email: string, password: string) {

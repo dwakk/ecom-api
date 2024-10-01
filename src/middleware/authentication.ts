@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import Account from '../models/Account';
 import { Request, Response, NextFunction } from 'express';
 
-export async function anthenticateJWT(req: Request, res: Response, next: NextFunction) {
+export async function authenticateJWT(req: Request, res: Response, next: NextFunction) {
     const authorization = req.headers.authorization;
 
     if (!authorization || !authorization.startsWith('Bearer ')) {
@@ -10,8 +10,13 @@ export async function anthenticateJWT(req: Request, res: Response, next: NextFun
     }
 
     const token = authorization.split(' ')[1];
+
+    if (!token) {
+        return next();
+    }
+
     try {
-        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        const payload = jwt.verify(token, process.env.JWT_SECRET!);
         const account = await Account.findByPk((payload as jwt.JwtPayload).id);
         if (!account) {
             return res.status(401).json({ message: 'Invalid token' });

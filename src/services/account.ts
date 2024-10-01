@@ -1,7 +1,8 @@
 import Account from "../models/Account";
 import AccountAttributes from "../typings/Account";
+import { comparePassword, generateToken, hashPassword } from "./authentication";
 
-async function createAccount(newAccount: Account) {
+export async function createAccountService(newAccount: Account) {
     try {
         const accountExists = await Account.findOne({ where: { email: newAccount.email } });
 
@@ -9,15 +10,20 @@ async function createAccount(newAccount: Account) {
             throw new Error('Account already exists');
         }
 
+        const hashed = await hashPassword(newAccount.password);
+        newAccount.password = hashed;
+
         const account = await Account.create(newAccount);
         return account;
 
-    } catch (err) {
+    } catch (err: any) {
+        console.error('Error creating account:', err.message);
         throw err;
     }
 }
 
-async function getAccountById(id: number) {
+
+export async function getAccountByIdService(id: number) {
     try {
         const account = await Account.findByPk(id);
         return account;
@@ -26,7 +32,7 @@ async function getAccountById(id: number) {
     }
 }
 
-async function getAllUsers() {
+export async function getAllAccountsService() {
     try {
         const accounts = await Account.findAll();
         return accounts;
@@ -35,7 +41,7 @@ async function getAllUsers() {
     }
 }
 
-async function deleteUser(id: number) {
+export async function deleteAccountService(id: number) {
     try {
         const account = await Account.findByPk(id);
         if (!account) {
@@ -48,7 +54,8 @@ async function deleteUser(id: number) {
     }
 }
 
-async function updateUser(id: number, updates: Partial<AccountAttributes>) {
+
+export async function updateAccountService(id: number, updates: Partial<AccountAttributes>) {
     try {
         const [affectedRows, [updatedAccount]] = await Account.update(updates, { where: { id }, returning: true, individualHooks: true });
         if (affectedRows === 0) {
@@ -60,10 +67,27 @@ async function updateUser(id: number, updates: Partial<AccountAttributes>) {
     }
 }
 
-export default {
-    createAccount,
-    getAccountById,
-    getAllUsers,
-    deleteUser,
-    updateUser
-};
+
+
+export async function loginAccountService(email: string, password: string) {
+    try {
+        const account = await Account.findOne({ where: { email } });
+        if (!account) {
+            throw new Error('Invalid email or password');
+        }
+
+        const match = await comparePassword(password, account.password);
+
+        if (!match) {
+            throw new Error('Invalid email or password');
+        }
+
+        const token = generateToken(account);
+        return token;
+
+    } catch (err: any) {
+        console.error('Login error:', err.message);
+        throw err;
+    }
+}
+

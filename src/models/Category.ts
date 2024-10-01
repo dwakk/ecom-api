@@ -1,7 +1,13 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from '../config/connection';
+import CategoryAttributes from "../typings/Category";
 
-class Category extends Model { }
+class Category extends Model<CategoryAttributes> implements CategoryAttributes {
+    public id!: number;
+    public slug!: string;
+    public category_name!: string;
+    public url!: string;
+}
 
 Category.init({
     id: {
