@@ -29,7 +29,7 @@ export async function authenticateJWT(req: Request, res: Response, next: NextFun
     return next();
 }
 
-export async function accessControl(role: "admin" | "user") {
+export function accessControl(role: "admin" | "user") {
     return (req: Request, res: Response, next: NextFunction) => {
         if (!req.account || req.account.role !== role) {
             return res.status(403).json({ message: 'You are not authorized to perform this action' });

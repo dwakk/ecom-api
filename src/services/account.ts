@@ -57,10 +57,11 @@ export async function deleteAccountService(id: number) {
 
 export async function updateAccountService(id: number, updates: Partial<AccountAttributes>) {
     try {
-        const [affectedRows, [updatedAccount]] = await Account.update(updates, { where: { id }, returning: true, individualHooks: true });
-        if (affectedRows === 0) {
-            throw new Error('Account not found');
+        const affectedRows = await Account.update(updates, { where: { id }, individualHooks: true });
+        if (affectedRows[0] === 0) {
+            throw new Error('Account not found or no changes made');
         }
+        const updatedAccount = await Account.findByPk(id);
         return updatedAccount;
     } catch (err) {
         throw err;

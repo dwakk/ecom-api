@@ -1,7 +1,7 @@
 import Category from "../models/Category";
 import Product from "../models/Product";
 
-async function createProduct(newProduct: Product) {
+export async function createProductService(newProduct: Product) {
     try {
         const product = await Product.create(newProduct);
         return product;
@@ -10,7 +10,7 @@ async function createProduct(newProduct: Product) {
     }
 }
 
-async function getProductById(id: number) {
+export async function getProductByIdService(id: number) {
     try {
         const product = await Product.findByPk(id);
         return product;
@@ -19,7 +19,7 @@ async function getProductById(id: number) {
     }
 }
 
-async function getAllProducts() {
+export async function getAllProductsService() {
     try {
         const products = await Product.findAll();
         return products;
@@ -28,7 +28,7 @@ async function getAllProducts() {
     }
 }
 
-async function getProductsByCategory(category: string | number) {
+export async function getProductsByCategoryService(category: string | number) {
     try {
         if (typeof category === 'string') {
             let c = await Category.findOne({ where: { slug: category } });
@@ -45,7 +45,7 @@ async function getProductsByCategory(category: string | number) {
 }
 
 
-async function deleteProduct(id: number) {
+export async function deleteProductService(id: number) {
     try {
         const product = await Product.findByPk(id);
         if (!product) {
@@ -58,7 +58,7 @@ async function deleteProduct(id: number) {
     }
 }
 
-async function updateProduct(id: number, updates: Partial<Product>) {
+export async function updateProductService(id: number, updates: Partial<Product>) {
     try {
         const [affectedRows, [updatedProduct]] = await Product.update(updates, { where: { id }, returning: true, individualHooks: true });
         if (affectedRows === 0) {
@@ -69,6 +69,3 @@ async function updateProduct(id: number, updates: Partial<Product>) {
         throw err;
     }
 }
-
-
-export default { createProduct, getProductById, getAllProducts, getProductsByCategory, deleteProduct, updateProduct };

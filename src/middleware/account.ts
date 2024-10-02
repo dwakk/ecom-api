@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Account from "../models/Account";
-import { createAccountService, loginAccountService } from "../services/account";
+import { createAccountService, loginAccountService, updateAccountService } from "../services/account";
 import { hashPassword } from "../services/authentication";
 
 export async function getAccountInfo(req: Request, res: Response, next: NextFunction) {
@@ -43,6 +43,25 @@ export async function createAccount(req: Request, res: Response, next: NextFunct
     try {
         const account = await createAccountService(newAccount);
         return res.status(201).json(account);
+    } catch (err: any) {
+        return res.status(500).json({ message: err.message });
+    }
+}
+
+export async function updateAccount(req: Request, res: Response, next: NextFunction) {
+    const data = req.body;
+    try {
+        if (data?.password) {
+            const account = await updateAccountService(req.account!.id, {
+                password: await hashPassword(data.password)
+            });
+
+            return res.status(200).json(account);
+        } else {
+            const account = await updateAccountService(req.account!.id, data);
+            return res.status(200).json(account);
+
+        }
     } catch (err: any) {
         return res.status(500).json({ message: err.message });
     }
