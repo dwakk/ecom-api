@@ -3,6 +3,8 @@ interface CategoryAttributes {
     slug: string;
     category_name: string;
     url: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export default CategoryAttributes;

@@ -4,6 +4,8 @@ interface ProductAttributes {
     price: number;
     category_id: number;
     description: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export default ProductAttributes;

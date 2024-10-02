@@ -4,6 +4,8 @@ interface AccountAttributes {
     email: string;
     password: string;
     role: "admin" | "user";
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export default AccountAttributes;

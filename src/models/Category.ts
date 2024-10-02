@@ -1,4 +1,4 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, CreationOptional } from "sequelize";
 import sequelize from '../config/connection';
 import CategoryAttributes from "../typings/Category";
 
@@ -7,6 +7,9 @@ class Category extends Model<CategoryAttributes> implements CategoryAttributes {
     public slug!: string;
     public category_name!: string;
     public url!: string;
+
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 
 Category.init({

@@ -1,4 +1,4 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, CreationOptional } from "sequelize";
 import sequelize from "../config/connection";
 import ProductAttributes from "../typings/Product";
 
@@ -8,6 +8,9 @@ class Product extends Model<ProductAttributes> implements ProductAttributes {
     public price!: number;
     public category_id!: number;
     public description!: string;
+
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 
 Product.init({
@@ -41,7 +44,7 @@ Product.init({
     }
 }, {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'product'

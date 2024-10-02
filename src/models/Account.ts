@@ -1,4 +1,4 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, CreationOptional } from "sequelize";
 import sequelize from "../config/connection";
 import AccountAttributes from "../typings/Account";
 
@@ -8,6 +8,9 @@ class Account extends Model<AccountAttributes> implements AccountAttributes {
     public email!: string;
     public password!: string;
     public role!: "admin" | "user";
+
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 
 Account.init({
@@ -35,7 +38,7 @@ Account.init({
     }
 }, {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'account'
