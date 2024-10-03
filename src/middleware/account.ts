@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import Account from "../models/Account";
 import { createAccountService, loginAccountService, updateAccountService } from "../services/account";
-import { hashPassword } from "../services/authentication";
 
 export async function getAccountInfo(req: Request, res: Response, next: NextFunction) {
-    const account = req.account;
+    try {
+        const account = req.account;
 
-    if (!account) {
-        return res.status(400).json({ message: 'No account found' });
+        if (!account) {
+            return res.status(400).json({ message: 'No account found' });
+        }
+
+        return res.status(200).json(account);
+    } catch (err) {
+        next(err);
     }
-
-    return res.json(account);
 }
 
 export async function loginAccount(req: Request, res: Response, next: NextFunction) {
@@ -22,8 +25,8 @@ export async function loginAccount(req: Request, res: Response, next: NextFuncti
     try {
         const accessToken = await loginAccountService(email, password);
         return res.status(200).json({ accessToken });
-    } catch (err: any) {
-        return res.status(500).json({ message: err.message });
+    } catch (err) {
+        next(err);
     }
 }
 
@@ -44,25 +47,20 @@ export async function createAccount(req: Request, res: Response, next: NextFunct
         const account = await createAccountService(newAccount);
         return res.status(201).json(account);
     } catch (err: any) {
-        return res.status(500).json({ message: err.message });
+        next(err);
     }
 }
 
 export async function updateAccount(req: Request, res: Response, next: NextFunction) {
     const data = req.body;
+    const account = req.account;
+    if (!account) {
+        return res.status(400).json({ message: 'No account found' });
+    }
     try {
-        if (data?.password) {
-            const account = await updateAccountService(req.account!.id, {
-                password: await hashPassword(data.password)
-            });
-
-            return res.status(200).json(account);
-        } else {
-            const account = await updateAccountService(req.account!.id, data);
-            return res.status(200).json(account);
-
-        }
+        const updatedAccount = await updateAccountService(account.id, data);
+        return res.status(200).json(updatedAccount);
     } catch (err: any) {
-        return res.status(500).json({ message: err.message });
+        next(err);
     }
 }

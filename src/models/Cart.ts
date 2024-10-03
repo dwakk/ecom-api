@@ -7,6 +7,7 @@ class Cart extends Model<CartAttributes> implements CartAttributes {
     public user_id!: number;
     public product_id!: number;
     public quantity!: number;
+    public order_id?: number | undefined;
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
@@ -37,6 +38,14 @@ Cart.init({
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    order_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'order',
+            key: 'id'
+        }
     }
 }, {
     sequelize,

@@ -1,6 +1,7 @@
-import Category from "../models/Category";
+import Category from '../models/Category';
+import CategoryAttributes from '../typings/Category';
 
-const data = [
+const data: CategoryAttributes[] = [
     {
         "id": 1,
         "slug": "beauty",

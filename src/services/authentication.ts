@@ -1,37 +1,72 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Account from '../models/Account';
+import { handleError } from './error';
+import AppError from '../structures/AppError';
 
-async function hashPassword(password: string) {
-    const salt = await bcrypt.genSalt(12);
-    return await bcrypt.hash(password, salt);
-}
-
-async function comparePassword(password: string, hash: string) {
-    return await bcrypt.compare(password, hash);
-}
-
-async function generateToken(account: Account) {
-    const payload = {
-        id: account.id,
-        role: account.role
-    };
-
-    return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1d' });
-}
-
-async function authenticate(email: string, password: string) {
-    const account = await Account.findOne({ where: { email } });
-    if (!account) {
-        throw new Error('Invalid email or password');
+async function hashPassword(password: string): Promise<string> {
+    try {
+        const salt = await bcrypt.genSalt(12);
+        const hash = await bcrypt.hash(password, salt);
+        if (!hash) {
+            throw new AppError('Failed to hash password', 500, true);
+        }
+        return hash;
+    } catch (err) {
+        throw handleError(err);
     }
+}
 
-    const match = await comparePassword(password, account.password);
-    if (!match) {
-        throw new Error('Invalid email or password');
+async function comparePassword(password: string, hash: string): Promise<boolean> {
+    try {
+        const match = await bcrypt.compare(password, hash);
+        if (!match) {
+            throw new AppError('Failed to compare password', 500, true);
+        }
+        return match;
+    } catch (err) {
+        throw handleError(err);
     }
+}
 
-    return generateToken(account);
+async function generateToken(account: Account): Promise<string> {
+    try {
+        const payload = {
+            id: account.id,
+            role: account.role
+        };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1d' });
+        if (!token) {
+            throw new AppError('Failed to generate token', 500, true);
+        }
+        return token;
+    } catch (err) {
+        throw handleError(err);
+    }
+}
+
+async function authenticate(email: string, password: string): Promise<string> {
+    try {
+        const account = await Account.findOne({ where: { email } });
+        if (!account) {
+            throw new AppError('Invalid email or password', 401, true);
+        }
+
+        const match = await comparePassword(password, account.password);
+        if (!match) {
+            throw new AppError('Invalid email or password', 401, true);
+        }
+
+        const token = generateToken(account);
+        if (!token) {
+            throw new AppError('Failed to generate token', 500, true);
+        }
+
+        return token;
+    } catch (err) {
+        throw handleError(err);
+    }
 }
 
 export { hashPassword, comparePassword, generateToken, authenticate };
