@@ -20,9 +20,6 @@ async function hashPassword(password: string): Promise<string> {
 async function comparePassword(password: string, hash: string): Promise<boolean> {
     try {
         const match = await bcrypt.compare(password, hash);
-        if (!match) {
-            throw new AppError('Failed to compare password', 500, true);
-        }
         return match;
     } catch (err) {
         throw handleError(err);
@@ -58,12 +55,7 @@ async function authenticate(email: string, password: string): Promise<string> {
             throw new AppError('Invalid email or password', 401, true);
         }
 
-        const token = generateToken(account);
-        if (!token) {
-            throw new AppError('Failed to generate token', 500, true);
-        }
-
-        return token;
+        return generateToken(account);
     } catch (err) {
         throw handleError(err);
     }

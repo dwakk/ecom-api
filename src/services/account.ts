@@ -101,9 +101,6 @@ export async function loginAccountService(email: string, password: string): Prom
         }
 
         const token = generateToken(account);
-        if (!token) {
-            throw new AppError('Failed to generate token', 500, true);
-        }
         return token;
 
     } catch (err) {

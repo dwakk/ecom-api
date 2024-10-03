@@ -1,30 +1,31 @@
 import jwt from 'jsonwebtoken';
 import Account from '../models/Account';
 import { Request, Response, NextFunction } from 'express';
+import AppError from '../structures/AppError';
 
 export async function authenticateJWT(req: Request, res: Response, next: NextFunction) {
     try {
         const authorization = req.headers.authorization;
 
         if (!authorization || !authorization.startsWith('Bearer ')) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            throw new AppError('Invalid token', 401, true);
         }
 
         const token = authorization.split(' ')[1];
 
         if (!token) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            throw new AppError('Invalid token', 401, true);
         }
 
         try {
             const payload = jwt.verify(token, process.env.JWT_SECRET!);
             const account = await Account.findByPk((payload as jwt.JwtPayload).id);
             if (!account) {
-                return res.status(401).json({ message: 'Invalid token' });
+                throw new AppError('Invalid token', 401, true);
             }
             req.account = account;
         } catch (error) {
-            return res.status(401).json({ message: 'Invalid token' });
+            throw new AppError('Invalid token', 401, true);
         }
 
         return next();
@@ -37,7 +38,7 @@ export function accessControl(role: "admin" | "user") {
     return (req: Request, res: Response, next: NextFunction) => {
         try {
             if (!req.account || req.account.role !== role) {
-                return res.status(403).json({ message: 'You are not authorized to perform this action' });
+                throw new AppError('You are not allowed to perform this action', 403, true);
             }
             next();
         } catch (err) {

@@ -7,7 +7,7 @@ export async function getProductsByCategory(req: Request, res: Response, next: N
         const { category } = req.params;
         const products = await getProductsByCategoryService(category);
         return res.json(products);
-    } catch (err: any) {
+    } catch (err) {
         next(err);
     }
 }

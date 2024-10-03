@@ -30,9 +30,6 @@ export async function getProductByIdService(id: number): Promise<Product> {
 export async function getAllProductsService(): Promise<Product[]> {
     try {
         const products = await Product.findAll();
-        if (!products) {
-            throw new AppError('Products not found', 404, true);
-        }
         return products;
     } catch (err) {
         throw handleError(err);

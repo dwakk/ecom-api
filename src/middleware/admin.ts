@@ -6,7 +6,7 @@ export async function getAllAccounts(req: Request, res: Response, next: NextFunc
     try {
         const accounts = await getAllAccountsService();
         return res.status(200).json(accounts);
-    } catch (err: any) {
+    } catch (err) {
         next(err);
     }
 }
@@ -15,7 +15,7 @@ export async function getAllProducts(req: Request, res: Response, next: NextFunc
     try {
         const products = await getAllProductsService();
         return res.status(200).json(products);
-    } catch (err: any) {
+    } catch (err) {
         next(err);
     }
 }
