@@ -29,6 +29,13 @@ Product.init({
         allowNull: false,
         validate: {
             isDecimal: true
+        },
+        get() {
+            const rawValue = this.getDataValue('price');
+            return typeof rawValue === 'string' ? parseFloat(rawValue) : rawValue;
+        },
+        set(value: string) {
+            this.setDataValue('price', parseFloat(value));
         }
     },
     category_id: {

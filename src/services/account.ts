@@ -1,10 +1,10 @@
 import Account from "../models/Account";
 import AppError from "../structures/AppError";
 import AccountAttributes from "../typings/Account";
-import { handleError } from "./error";
-import { comparePassword, generateToken, hashPassword } from "./authentication";
+import { handleError } from "../utils/handleError";
+import { authenticationService } from "./authentication";
 
-export async function createAccountService(newAccount: Account): Promise<Account> {
+async function createAccount(newAccount: Account): Promise<string> {
     try {
         const accountExists = await Account.findOne({ where: { email: newAccount.email } });
 
@@ -12,14 +12,16 @@ export async function createAccountService(newAccount: Account): Promise<Account
             throw new AppError('Account already exists', 409, true);
         }
 
-        const hashed = await hashPassword(newAccount.password);
+        const hashed = await authenticationService.hashPassword(newAccount.password);
         newAccount.password = hashed;
 
         const account = await Account.create(newAccount);
         if (!account) {
             throw new AppError('Account not created', 500, true);
         }
-        return account;
+
+        const token = authenticationService.generateToken(account);
+        return token;
 
     } catch (err) {
         throw handleError(err);
@@ -27,7 +29,7 @@ export async function createAccountService(newAccount: Account): Promise<Account
 }
 
 
-export async function getAccountByIdService(id: number): Promise<Account> {
+async function getAccountById(id: number): Promise<Account> {
     try {
         const account = await Account.findByPk(id);
         if (!account) {
@@ -39,7 +41,7 @@ export async function getAccountByIdService(id: number): Promise<Account> {
     }
 }
 
-export async function getAllAccountsService(): Promise<Account[]> {
+async function getAll(): Promise<Account[]> {
     try {
         const accounts = await Account.findAll();
         if (!accounts) {
@@ -51,12 +53,8 @@ export async function getAllAccountsService(): Promise<Account[]> {
     }
 }
 
-export async function deleteAccountService(id: number): Promise<boolean> {
+async function deleteAccount(account: Account): Promise<true> {
     try {
-        const account = await Account.findByPk(id);
-        if (!account) {
-            throw new AppError('Account not found', 404, true);
-        }
         await account.destroy();
         return true;
     } catch (err) {
@@ -65,10 +63,10 @@ export async function deleteAccountService(id: number): Promise<boolean> {
 }
 
 
-export async function updateAccountService(id: number, updates: Partial<AccountAttributes>): Promise<Account> {
+async function updateAccount(id: number, updates: Partial<AccountAttributes>): Promise<Account> {
     try {
         if (updates.password) {
-            const hashed = await hashPassword(updates.password);
+            const hashed = await authenticationService.hashPassword(updates.password);
             updates.password = hashed;
         }
         const affectedRows = await Account.update(updates, { where: { id }, individualHooks: true });
@@ -87,20 +85,20 @@ export async function updateAccountService(id: number, updates: Partial<AccountA
 
 
 
-export async function loginAccountService(email: string, password: string): Promise<string> {
+async function loginAccount(email: string, password: string): Promise<string> {
     try {
         const account = await Account.findOne({ where: { email } });
         if (!account) {
             throw new AppError('Invalid email or password', 401, true);
         }
 
-        const match = await comparePassword(password, account.password);
+        const match = await authenticationService.comparePassword(password, account.password);
 
         if (!match) {
             throw new AppError('Invalid email or password', 401, true);
         }
 
-        const token = generateToken(account);
+        const token = authenticationService.generateToken(account);
         return token;
 
     } catch (err) {
@@ -108,3 +106,13 @@ export async function loginAccountService(email: string, password: string): Prom
     }
 }
 
+const accountService = {
+    createAccount,
+    getAccountById,
+    getAll,
+    deleteAccount,
+    updateAccount,
+    loginAccount
+};
+
+export { accountService };

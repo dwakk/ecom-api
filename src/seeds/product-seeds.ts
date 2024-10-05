@@ -41,35 +41,35 @@ const data: ProductAttributes[] = [
         "id": 6,
         "product_name": "Calvin Klein CK One",
         "description": "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
-        "category_id": 1,
+        "category_id": 2,
         "price": 49.99
     },
     {
         "id": 7,
         "product_name": "Chanel Coco Noir Eau De",
         "description": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
-        "category_id": 1,
+        "category_id": 2,
         "price": 129.99
     },
     {
         "id": 8,
         "product_name": "Dior J'adore",
         "description": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
-        "category_id": 1,
+        "category_id": 2,
         "price": 89.99
     },
     {
         "id": 9,
         "product_name": "Dolce Shine Eau de",
         "description": "Dolce Shine by Dolce & Gabbana is a vibrant and fruity fragrance, featuring notes of mango, jasmine, and blonde woods. It's a joyful and youthful scent.",
-        "category_id": 1,
+        "category_id": 2,
         "price": 69.99
     },
     {
         "id": 10,
         "product_name": "Gucci Bloom Eau de",
         "description": "Gucci Bloom by Gucci is a floral and captivating fragrance, with notes of tuberose, jasmine, and Rangoon creeper. It's a modern and romantic scent.",
-        "category_id": 1,
+        "category_id": 2,
         "price": 79.99
     },
     {

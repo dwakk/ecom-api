@@ -1,10 +1,14 @@
 import Category from "../models/Category";
 import Product from "../models/Product";
 import AppError from "../structures/AppError";
-import { handleError } from "./error";
+import { handleError } from "../utils/handleError";
 
-export async function createProductService(newProduct: Product): Promise<Product> {
+async function createProduct(newProduct: Product): Promise<Product> {
     try {
+        const productExists = await Product.findOne({ where: { product_name: newProduct.product_name } });
+        if (productExists) {
+            throw new AppError('Product already exists', 409, true);
+        }
         const product = await Product.create(newProduct);
         if (!product) {
             throw new AppError('Product not created', 500, true);
@@ -15,7 +19,7 @@ export async function createProductService(newProduct: Product): Promise<Product
     }
 }
 
-export async function getProductByIdService(id: number): Promise<Product> {
+async function getProductById(id: number): Promise<Product> {
     try {
         const product = await Product.findByPk(id);
         if (!product) {
@@ -27,7 +31,7 @@ export async function getProductByIdService(id: number): Promise<Product> {
     }
 }
 
-export async function getAllProductsService(): Promise<Product[]> {
+async function getAll(): Promise<Product[]> {
     try {
         const products = await Product.findAll();
         return products;
@@ -36,27 +40,29 @@ export async function getAllProductsService(): Promise<Product[]> {
     }
 }
 
-export async function getProductsByCategoryService(category: string | number) {
+async function getProductsByCategory(category: string): Promise<{ cat: Category, products: Product[]; }> {
     try {
-        if (typeof category === 'string') {
-            let c = await Category.findOne({ where: { slug: category } });
-            if (!c) {
-                throw new AppError('Category not found', 404, true);
-            }
-            category = c.id;
+        let cat: Category | null;
+        if (isNaN(parseInt(category))) {
+            cat = await Category.findOne({ where: { slug: category } });
+        } else {
+            cat = await Category.findOne({ where: { id: parseInt(category) } });
         }
-        const products = await Product.findAll({ where: { category_id: category } });
+        if (!cat) {
+            throw new AppError('Category not found', 404, true);
+        }
+        const products = await Product.findAll({ where: { category_id: cat.id } });
         if (!products) {
             throw new AppError('Products not found', 404, true);
         }
-        return products;
+        return { cat, products };
     } catch (err) {
         throw handleError(err);
     }
 }
 
 
-export async function deleteProductService(id: number) {
+async function deleteProduct(id: number): Promise<true> {
     try {
         const product = await Product.findByPk(id);
         if (!product) {
@@ -69,12 +75,27 @@ export async function deleteProductService(id: number) {
     }
 }
 
-export async function updateProductService(id: number, updates: Partial<Product>) {
+async function updateProduct(id: number, updates: Partial<Product>): Promise<Product> {
     try {
-        const [affectedRows, [updatedProduct]] = await Product.update(updates, { where: { id }, returning: true, individualHooks: true });
-        if (affectedRows === 0) {
+
+        if (updates.price) {
+            console.log("Updating price");
+            const priceVal = parseFloat(updates.price.toString());
+            if (isNaN(priceVal) || priceVal < 0) {
+                throw new AppError('Invalid price', 400, true);
+            }
+            if (updates.price === priceVal) {
+                throw new AppError('Product price not changed', 400, true);
+            }
+            updates.price = priceVal;
+        }
+
+
+        const affectedRows = await Product.update(updates, { where: { id }, individualHooks: true });
+        if (affectedRows[0] === 0) {
             throw new AppError('Product not found or no changes made', 404, true);
         }
+        const updatedProduct = await Product.findByPk(id);
         if (!updatedProduct) {
             throw new AppError('Product not found', 404, true);
         }
@@ -83,3 +104,14 @@ export async function updateProductService(id: number, updates: Partial<Product>
         throw handleError(err);
     }
 }
+
+const productService = {
+    createProduct,
+    getProductById,
+    getAll,
+    getProductsByCategory,
+    deleteProduct,
+    updateProduct,
+};
+
+export { productService };

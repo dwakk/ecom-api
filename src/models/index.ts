@@ -3,22 +3,33 @@ import Cart from "./Cart";
 import Category from "./Category";
 import Product from "./Product";
 import Order from "./Order";
+import CartProduct from "./CartProduct";
+import OrderProduct from "./OrderProduct";
 
 Product.belongsTo(Category);
+Category.hasMany(Product, { foreignKey: "category_id" });
 
-Category.hasMany(Product);
+Cart.belongsTo(Account, { foreignKey: "account_id" });
+Account.hasOne(Cart, { foreignKey: "account_id" });
 
-Cart.belongsTo(Account);
+Cart.belongsToMany(Product, { through: CartProduct, foreignKey: "cart_id" });
+Product.belongsToMany(Cart, { through: CartProduct, foreignKey: "product_id" });
 
-Cart.hasMany(Product);
+Order.belongsTo(Cart, { foreignKey: "cart_id", onDelete: "CASCADE" });
+Cart.hasOne(Order, { foreignKey: "cart_id", onDelete: "CASCADE" });
 
-Order.belongsTo(Account);
+Order.belongsTo(Account, { foreignKey: "account_id" });
+Account.hasMany(Order, { foreignKey: "account_id" });
 
-Order.hasMany(Cart);
+Order.belongsToMany(Product, { through: OrderProduct, foreignKey: "order_id" });
+Product.belongsToMany(Order, { through: OrderProduct, foreignKey: "product_id" });
 
 module.exports = {
     Account,
+    Cart,
+    CartProduct,
     Category,
+    Order,
     Product,
-    Cart
+    OrderProduct
 };

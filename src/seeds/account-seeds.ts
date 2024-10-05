@@ -1,6 +1,6 @@
 import Account from "../models/Account";
 import AccountAttributes from "../typings/Account";
-import { hashPassword } from "../services/authentication";
+import { authenticationService } from "../services/authentication";
 
 const data: AccountAttributes[] = [
     {
@@ -21,7 +21,7 @@ const data: AccountAttributes[] = [
 
 async function seedAccounts() {
     for (const account of data) {
-        account.password = await hashPassword(account.password);
+        account.password = await authenticationService.hashPassword(account.password);
     }
     await Account.bulkCreate(data);
 }

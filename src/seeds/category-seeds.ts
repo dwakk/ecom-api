@@ -6,145 +6,145 @@ const data: CategoryAttributes[] = [
         "id": 1,
         "slug": "beauty",
         "category_name": "Beauty",
-        "url": "http://localhost:3000/api/products/category/beauty"
+        "url": `${process.env.BASE_URL}/category/beauty`
     },
     {
         "id": 2,
         "slug": "fragrances",
         "category_name": "Fragrances",
-        "url": "http://localhost:3000/api/products/category/fragrances"
+        "url": `${process.env.BASE_URL}/category/fragrances`
     },
     {
         "id": 3,
         "slug": "furniture",
         "category_name": "Furniture",
-        "url": "http://localhost:3000/api/products/category/furniture"
+        "url": `${process.env.BASE_URL}/category/furniture`
     },
     {
         "id": 4,
         "slug": "groceries",
         "category_name": "Groceries",
-        "url": "http://localhost:3000/api/products/category/groceries"
+        "url": `${process.env.BASE_URL}/category/groceries`
     },
     {
         "id": 5,
         "slug": "home-decoration",
         "category_name": "Home Decoration",
-        "url": "http://localhost:3000/api/products/category/home-decoration"
+        "url": `${process.env.BASE_URL}/category/home-decoration`
     },
     {
         "id": 6,
         "slug": "kitchen-accessories",
         "category_name": "Kitchen Accessories",
-        "url": "http://localhost:3000/api/products/category/kitchen-accessories"
+        "url": `${process.env.BASE_URL}/category/kitchen-accessories`
     },
     {
         "id": 7,
         "slug": "laptops",
         "category_name": "Laptops",
-        "url": "http://localhost:3000/api/products/category/laptops"
+        "url": `${process.env.BASE_URL}/category/laptops`
     },
     {
         "id": 8,
         "slug": "mens-shirts",
         "category_name": "Mens Shirts",
-        "url": "http://localhost:3000/api/products/category/mens-shirts"
+        "url": `${process.env.BASE_URL}/category/mens-shirts`
     },
     {
         "id": 9,
         "slug": "mens-shoes",
         "category_name": "Mens Shoes",
-        "url": "http://localhost:3000/api/products/category/mens-shoes"
+        "url": `${process.env.BASE_URL}/category/mens-shoes`
     },
     {
         "id": 10,
         "slug": "mens-watches",
         "category_name": "Mens Watches",
-        "url": "http://localhost:3000/api/products/category/mens-watches"
+        "url": `${process.env.BASE_URL}/category/mens-watches`
     },
     {
         "id": 11,
         "slug": "mobile-accessories",
         "category_name": "Mobile Accessories",
-        "url": "http://localhost:3000/api/products/category/mobile-accessories"
+        "url": `${process.env.BASE_URL}/category/mobile-accessories`
     },
     {
         "id": 12,
         "slug": "motorcycle",
         "category_name": "Motorcycle",
-        "url": "http://localhost:3000/api/products/category/motorcycle"
+        "url": `${process.env.BASE_URL}/category/motorcycle`
     },
     {
         "id": 13,
         "slug": "skin-care",
         "category_name": "Skin Care",
-        "url": "http://localhost:3000/api/products/category/skin-care"
+        "url": `${process.env.BASE_URL}/category/skin-care`
     },
     {
         "id": 14,
         "slug": "smartphones",
         "category_name": "Smartphones",
-        "url": "http://localhost:3000/api/products/category/smartphones"
+        "url": `${process.env.BASE_URL}/category/smartphones`
     },
     {
         "id": 15,
         "slug": "sports-accessories",
         "category_name": "Sports Accessories",
-        "url": "http://localhost:3000/api/products/category/sports-accessories"
+        "url": `${process.env.BASE_URL}/category/sports-accessories`
     },
     {
         "id": 16,
         "slug": "sunglasses",
         "category_name": "Sunglasses",
-        "url": "http://localhost:3000/api/products/category/sunglasses"
+        "url": `${process.env.BASE_URL}/category/sunglasses`
     },
     {
         "id": 17,
         "slug": "tablets",
         "category_name": "Tablets",
-        "url": "http://localhost:3000/api/products/category/tablets"
+        "url": `${process.env.BASE_URL}/category/tablets`
     },
     {
         "id": 18,
         "slug": "tops",
         "category_name": "Tops",
-        "url": "http://localhost:3000/api/products/category/tops"
+        "url": `${process.env.BASE_URL}/category/tops`
     },
     {
         "id": 19,
         "slug": "vehicle",
         "category_name": "Vehicle",
-        "url": "http://localhost:3000/api/products/category/vehicle"
+        "url": `${process.env.BASE_URL}/category/vehicle`
     },
     {
         "id": 20,
         "slug": "womens-bags",
         "category_name": "Womens Bags",
-        "url": "http://localhost:3000/api/products/category/womens-bags"
+        "url": `${process.env.BASE_URL}/category/womens-bags`
     },
     {
         "id": 21,
         "slug": "womens-dresses",
         "category_name": "Womens Dresses",
-        "url": "http://localhost:3000/api/products/category/womens-dresses"
+        "url": `${process.env.BASE_URL}/category/womens-dresses`
     },
     {
         "id": 22,
         "slug": "womens-jewellery",
         "category_name": "Womens Jewellery",
-        "url": "http://localhost:3000/api/products/category/womens-jewellery"
+        "url": `${process.env.BASE_URL}/category/womens-jewellery`
     },
     {
         "id": 23,
         "slug": "womens-shoes",
         "category_name": "Womens Shoes",
-        "url": "http://localhost:3000/api/products/category/womens-shoes"
+        "url": `${process.env.BASE_URL}/category/womens-shoes`
     },
     {
         "id": 24,
         "slug": "womens-watches",
         "category_name": "Womens Watches",
-        "url": "http://localhost:3000/api/products/category/womens-watches"
+        "url": `${process.env.BASE_URL}/category/womens-watches`
     }
 ];
 

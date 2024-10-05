@@ -4,9 +4,10 @@ import OrderAttributes from "../typings/Order";
 
 class Order extends Model<OrderAttributes> implements OrderAttributes {
     public id!: number;
-    public user_id!: number;
-    public status!: string;
+    public account_id!: number;
     public total_price!: number;
+    public cart_id!: number | null;
+    public status!: "pending" | "completed";
     public createdAt?: Date;
     public updatedAt?: Date;
 }
@@ -18,7 +19,7 @@ Order.init({
         primaryKey: true,
         autoIncrement: true
     },
-    user_id: {
+    account_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -26,15 +27,22 @@ Order.init({
             key: 'id'
         }
     },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "pending"
-    },
     total_price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
+    cart_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'cart',
+            key: 'id'
+        }
+    },
+    status: {
+        type: DataTypes.ENUM("pending", "completed"),
+        allowNull: false,
+    }
 }, {
     sequelize,
     timestamps: true,

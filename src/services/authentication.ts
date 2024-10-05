@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Account from '../models/Account';
-import { handleError } from './error';
+import { handleError } from '../utils/handleError';
 import AppError from '../structures/AppError';
 
 async function hashPassword(password: string): Promise<string> {
@@ -61,4 +61,11 @@ async function authenticate(email: string, password: string): Promise<string> {
     }
 }
 
-export { hashPassword, comparePassword, generateToken, authenticate };
+const authenticationService = {
+    hashPassword,
+    comparePassword,
+    generateToken,
+    authenticate
+};
+
+export { authenticationService };

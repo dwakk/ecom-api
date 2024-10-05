@@ -6,7 +6,7 @@ export const errorHandler: ErrorRequestHandler = (err: unknown, req: Request, re
     console.error(`Request: ${req.method} ${req.url}`);
 
     let statusCode = 500;
-    let message = "An unknown error occurred";
+    let message;
     if (err instanceof AppError) {
         statusCode = err.statusCode || 500;
         message = err.isOperational ? err.message : "An unknown error occurred";
