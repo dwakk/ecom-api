@@ -8,6 +8,7 @@ class Product extends Model<ProductAttributes> implements ProductAttributes {
     public price!: number;
     public category_id!: number;
     public description!: string;
+    public thumbnail!: string;
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
@@ -30,13 +31,6 @@ Product.init({
         validate: {
             isDecimal: true
         },
-        get() {
-            const rawValue = this.getDataValue('price');
-            return typeof rawValue === 'string' ? parseFloat(rawValue) : rawValue;
-        },
-        set(value: string) {
-            this.setDataValue('price', parseFloat(value));
-        }
     },
     category_id: {
         type: DataTypes.INTEGER,
@@ -44,6 +38,10 @@ Product.init({
             model: 'category',
             key: 'id'
         }
+    },
+    thumbnail: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     description: {
         type: DataTypes.STRING,

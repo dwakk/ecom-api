@@ -1,5 +1,4 @@
-import Category from "../models/Category";
-import Product from "../models/Product";
+import { Product, ProductImage, Category } from "../models/index";
 import AppError from "../structures/AppError";
 import { handleError } from "../utils/handleError";
 
@@ -21,7 +20,7 @@ async function createProduct(newProduct: Product): Promise<Product> {
 
 async function getProductById(id: number): Promise<Product> {
     try {
-        const product = await Product.findByPk(id);
+        const product = await Product.findByPk(id, { include: [ProductImage] });
         if (!product) {
             throw new AppError('Product not found', 404, true);
         }
@@ -33,7 +32,8 @@ async function getProductById(id: number): Promise<Product> {
 
 async function getAll(): Promise<Product[]> {
     try {
-        const products = await Product.findAll();
+        console.log(Product.associations);
+        const products = await Product.findAll({ include: [{ model: ProductImage, as: "images" }] });
         return products;
     } catch (err) {
         throw handleError(err);

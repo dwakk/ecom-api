@@ -4,6 +4,7 @@ interface ProductAttributes {
     price: number;
     category_id: number;
     description: string;
+    thumbnail: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

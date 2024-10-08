@@ -5,9 +5,13 @@ import Product from "./Product";
 import Order from "./Order";
 import CartProduct from "./CartProduct";
 import OrderProduct from "./OrderProduct";
+import ProductImage from "./ProductImage";
 
 Product.belongsTo(Category);
 Category.hasMany(Product, { foreignKey: "category_id" });
+
+Product.hasMany(ProductImage, { foreignKey: "product_id", as: "images" });
+ProductImage.belongsTo(Product, { foreignKey: "product_id", as: "product" });
 
 Cart.belongsTo(Account, { foreignKey: "account_id" });
 Account.hasOne(Cart, { foreignKey: "account_id" });
@@ -24,12 +28,13 @@ Account.hasMany(Order, { foreignKey: "account_id" });
 Order.belongsToMany(Product, { through: OrderProduct, foreignKey: "order_id" });
 Product.belongsToMany(Order, { through: OrderProduct, foreignKey: "product_id" });
 
-module.exports = {
+export {
     Account,
     Cart,
-    CartProduct,
     Category,
-    Order,
     Product,
-    OrderProduct
+    Order,
+    CartProduct,
+    OrderProduct,
+    ProductImage
 };

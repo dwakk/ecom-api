@@ -8,8 +8,9 @@ class Order extends Model<OrderAttributes> implements OrderAttributes {
     public total_price!: number;
     public cart_id!: number | null;
     public status!: "pending" | "completed";
-    public createdAt?: Date;
-    public updatedAt?: Date;
+
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 
 Order.init({
