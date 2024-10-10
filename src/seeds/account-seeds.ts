@@ -1,4 +1,4 @@
-import Account from "../models/Account";
+import { Account } from "../models";
 import AccountAttributes from "../typings/Account";
 import { authenticationService } from "../services/authentication";
 

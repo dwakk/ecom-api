@@ -18,7 +18,6 @@ async function seedAll() {
     await seedCarts();
     await seedCartProducts();
     await seedProductImages();
-    await sequelize.sync({ force: true });
     console.log("[DATABASE]: Seeded");
 
     process.exit(0);

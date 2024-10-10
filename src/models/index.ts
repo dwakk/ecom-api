@@ -19,6 +19,9 @@ Account.hasOne(Cart, { foreignKey: "account_id" });
 Cart.belongsToMany(Product, { through: CartProduct, foreignKey: "cart_id" });
 Product.belongsToMany(Cart, { through: CartProduct, foreignKey: "product_id" });
 
+CartProduct.belongsTo(Cart, { foreignKey: "cart_id", onDelete: "CASCADE" });
+CartProduct.belongsTo(Product, { foreignKey: "product_id", onDelete: "CASCADE" });
+
 Order.belongsTo(Cart, { foreignKey: "cart_id", onDelete: "CASCADE" });
 Cart.hasOne(Order, { foreignKey: "cart_id", onDelete: "CASCADE" });
 

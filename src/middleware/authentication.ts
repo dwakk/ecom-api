@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Account from '../models/Account';
+import { Account } from '../models';
 import { Request, Response, NextFunction } from 'express';
 import AppError from '../structures/AppError';
 

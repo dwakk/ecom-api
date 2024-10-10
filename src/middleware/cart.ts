@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Cart from "../models/Cart";
+import { Cart } from "../models";
 import AppError from "../structures/AppError";
 
 export async function setCart(req: Request, res: Response, next: NextFunction) {
