@@ -1,4 +1,4 @@
-import Account from "../models/Account";
+import { Account } from "../models";
 import AppError from "../structures/AppError";
 import AccountAttributes from "../typings/Account";
 import { handleError } from "../utils/handleError";

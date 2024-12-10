@@ -1,4 +1,4 @@
-import Product from "../models/Product";
+import { Product } from "../models";
 import ProductAttributes from "../typings/Product";
 
 const data: ProductAttributes[] = [

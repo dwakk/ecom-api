@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import Account from '../models/Account';
+import { Account } from '../models';
 import { handleError } from '../utils/handleError';
 import AppError from '../structures/AppError';
 

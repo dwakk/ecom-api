@@ -1,4 +1,4 @@
-import Category from "../models/Category";
+import { Category, Product } from "../models";
 import AppError from "../structures/AppError";
 import { handleError } from "../utils/handleError";
 
@@ -66,11 +66,31 @@ async function updateCategory(id: number, updates: Partial<Category>): Promise<C
     }
 }
 
+async function getProductsByCategory(category: string): Promise<{ cat: Category, products: Product[]; }> {
+    try {
+        const identifier = isNaN(parseInt(category))
+            ? { slug: category }
+            : { id: parseInt(category) };
+
+        const cat = await Category.findOne({ where: identifier });
+        if (!cat) {
+            throw new AppError('Category not found', 404, true);
+        }
+
+        const products = await Product.findAll({ where: { category_id: cat.id } });
+
+        return { cat, products };
+    } catch (err) {
+        throw handleError(err);
+    }
+}
+
 const categoryService = {
     getAll,
     createCategory,
     deleteCategory,
     updateCategory,
+    getProductsByCategory
 };
 
 export { categoryService };

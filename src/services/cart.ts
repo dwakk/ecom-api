@@ -1,44 +1,44 @@
-import Cart from "../models/Cart";
-import CartProduct from "../models/CartProduct";
-import Product from "../models/Product";
+import { Cart, CartProduct, Product } from "../models";
 import AppError from "../structures/AppError";
+import CartProductWithProductAttributes from "../typings/CartProductWithProduct";
 import { handleError } from "../utils/handleError";
 
-async function getCartProducts(id: number): Promise<CartProduct[]> {
+async function getCartProducts(id: number): Promise<CartProductWithProductAttributes[]> {
     try {
-        const cart = await Cart.findByPk(id);
+        const cart = await Cart.findByPk(id, {
+            include: {
+                model: Product
+            }
+        });
+
         if (!cart) {
             throw new AppError('Cart not found', 404, true);
         }
+
         const cartProducts = await CartProduct.findAll({
-            where: {
-                cart_id: cart.id
-            }
+            where: { cart_id: cart.id },
+            include: [{ model: Product, as: 'product' }]
         });
-        return cartProducts;
+        return cartProducts as unknown as CartProductWithProductAttributes[];
     } catch (err) {
         throw handleError(err);
     }
 }
 
-async function getSingleCartProduct(cartId: number, productId: number): Promise<CartProduct> {
+
+async function getSingleCartProduct(cartId: number, productId: number): Promise<CartProductWithProductAttributes> {
     try {
-        const cartProduct = await CartProduct.findOne({
-            where: {
-                cart_id: cartId,
-                product_id: productId
-            }
-        });
+        const cartProduct = await CartProduct.findOne({ where: { cart_id: cartId, product_id: productId }, include: [{ model: Product, as: 'product' }] });
         if (!cartProduct) {
             throw new AppError('Cart product not found', 404, true);
         }
-        return cartProduct;
+        return cartProduct as unknown as CartProductWithProductAttributes;
     } catch (err) {
         throw handleError(err);
     }
 }
 
-async function addProductToCart(cart: Cart, productId: number, quantity: number): Promise<CartProduct[]> {
+async function addProductToCart(cart: Cart, productId: number, quantity: number): Promise<CartProductWithProductAttributes[]> {
     try {
         const product = await Product.findByPk(productId);
         if (!product) {
@@ -96,7 +96,7 @@ async function clearCart(cart: Cart): Promise<true> {
     }
 }
 
-async function removeQuantity(cart: Cart, productId: number, quantity: number): Promise<CartProduct[]> {
+async function removeQuantity(cart: Cart, productId: number, quantity: number): Promise<CartProductWithProductAttributes[]> {
     try {
         const cartProduct = await CartProduct.findOne({
             where: {
@@ -124,11 +124,7 @@ async function getTotalPrice(cart: Cart): Promise<number> {
         const cartProducts = await getCartProducts(cart.id);
         let totalPrice = 0;
         for (const cartProduct of cartProducts) {
-            const product = await Product.findByPk(cartProduct.product_id);
-            if (!product) {
-                throw new AppError('Product not found', 404, true);
-            }
-            totalPrice += product.price * cartProduct.quantity;
+            totalPrice += cartProduct.product.price * cartProduct.quantity;
         }
         return totalPrice;
     } catch (err) {

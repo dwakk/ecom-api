@@ -11,7 +11,11 @@ orderRouter.post("/checkout", authenticateJWT, setCart, setOrder, orderControlle
 orderRouter.get("/status/:sessionId", authenticateJWT, orderController.getSessionStatus);
 
 orderRouter.get("/success", (req, res) => {
-    res.json({ message: "Order successful" });
+    const sessionId = req.query.session_id;
+    if (!sessionId) {
+        return res.json({ message: "Session not found" });
+    }
+    res.redirect(`/api/order/status/${sessionId}`);
 });
 
 orderRouter.get("/cancel", (req, res) => {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Product from "../models/Product";
+import { Product } from "../models";
 import { productService } from "../services/product";
 import AppError from "../structures/AppError";
 

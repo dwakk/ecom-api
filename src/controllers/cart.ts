@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import Cart from "../models/Cart";
 import { cartService } from "../services/cart";
+
 import AppError from "../structures/AppError";
 
 async function getCartProducts(req: Request, res: Response, next: NextFunction) {

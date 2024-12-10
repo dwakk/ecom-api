@@ -1,13 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import Category from "../models/Category";
-import { productService } from "../services/product";
+import { Category } from "../models";
 import AppError from "../structures/AppError";
 import { categoryService } from "../services/category";
 
 async function getProductsByCategory(req: Request, res: Response, next: NextFunction) {
     try {
         const { category } = req.params;
-        const { products, cat } = await productService.getProductsByCategory(category);
+        const { products, cat } = await categoryService.getProductsByCategory(category);
         return res.json({ category: cat, products });
     } catch (err) {
         next(err);

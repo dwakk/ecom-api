@@ -1,4 +1,4 @@
-import ProductImage from "../models/ProductImage";
+import { ProductImage } from "../models";
 import ProductImageAttributes from "../typings/ProductImage";
 import seedProducts from './product-seeds';
 

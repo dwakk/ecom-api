@@ -1,4 +1,4 @@
-import Cart from "../models/Cart";
+import { Cart } from "../models";
 import CartAttributes from "../typings/Cart";
 
 const data: CartAttributes[] = [];

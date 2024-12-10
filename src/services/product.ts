@@ -1,4 +1,4 @@
-import { Product, ProductImage, Category } from "../models/index";
+import { Product, ProductImage } from "../models";
 import AppError from "../structures/AppError";
 import { handleError } from "../utils/handleError";
 
@@ -20,7 +20,7 @@ async function createProduct(newProduct: Product): Promise<Product> {
 
 async function getProductById(id: number): Promise<Product> {
     try {
-        const product = await Product.findByPk(id, { include: [ProductImage] });
+        const product = await Product.findByPk(id, { include: [{ model: ProductImage, as: 'images' }] });
         if (!product) {
             throw new AppError('Product not found', 404, true);
         }
@@ -33,33 +33,13 @@ async function getProductById(id: number): Promise<Product> {
 async function getAll(): Promise<Product[]> {
     try {
         console.log(Product.associations);
-        const products = await Product.findAll({ include: [{ model: ProductImage, as: "images" }] });
+        const products = await Product.findAll({ include: [{ model: ProductImage, as: 'images' }] });
         return products;
     } catch (err) {
         throw handleError(err);
     }
 }
 
-async function getProductsByCategory(category: string): Promise<{ cat: Category, products: Product[]; }> {
-    try {
-        let cat: Category | null;
-        if (isNaN(parseInt(category))) {
-            cat = await Category.findOne({ where: { slug: category } });
-        } else {
-            cat = await Category.findOne({ where: { id: parseInt(category) } });
-        }
-        if (!cat) {
-            throw new AppError('Category not found', 404, true);
-        }
-        const products = await Product.findAll({ where: { category_id: cat.id } });
-        if (!products) {
-            throw new AppError('Products not found', 404, true);
-        }
-        return { cat, products };
-    } catch (err) {
-        throw handleError(err);
-    }
-}
 
 
 async function deleteProduct(id: number): Promise<true> {
@@ -109,7 +89,6 @@ const productService = {
     createProduct,
     getProductById,
     getAll,
-    getProductsByCategory,
     deleteProduct,
     updateProduct,
 };

@@ -28,7 +28,7 @@ async function getSessionStatus(req: Request, res: Response, next: NextFunction)
             return next(new AppError('Session not found', 404, true));
         }
 
-        return res.status(200).json({ status });
+        return res.status(200).json(status);
     } catch (err) {
         next(err);
     }
