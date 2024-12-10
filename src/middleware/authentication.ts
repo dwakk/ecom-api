@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Account from '../models/Account';
+import { Account } from '../models';
 import { Request, Response, NextFunction } from 'express';
 import AppError from '../structures/AppError';
 
@@ -8,13 +8,13 @@ export async function authenticateJWT(req: Request, res: Response, next: NextFun
         const authorization = req.headers.authorization;
 
         if (!authorization || !authorization.startsWith('Bearer ')) {
-            return next(new AppError('Invalid token', 401, true));
+            return next(new AppError('No authorization found', 401, true));
         }
 
         const token = authorization.split(' ')[1];
 
         if (!token) {
-            return next(new AppError('Invalid token', 401, true));
+            return next(new AppError('No token found', 401, true));
         }
 
         try {
