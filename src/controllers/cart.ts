@@ -80,7 +80,7 @@ async function clearCart(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-async function removeQuantity(req: Request, res: Response, next: NextFunction) {
+async function editQuantity(req: Request, res: Response, next: NextFunction) {
     try {
         const cart = req.cart;
         if (!cart) {
@@ -99,7 +99,7 @@ async function removeQuantity(req: Request, res: Response, next: NextFunction) {
             return next(new AppError('Product ID or quantity must be greater than 0', 400, true));
         }
 
-        const updatedCart = await cartService.removeQuantity(cart, product_id, quantity);
+        const updatedCart = await cartService.editQuantity(cart, product_id, quantity);
         return res.status(200).json(updatedCart);
     } catch (err) {
         next(err);
@@ -124,7 +124,7 @@ const cartController = {
     addToCart,
     removeFromCart,
     clearCart,
-    removeQuantity,
+    editQuantity,
     getTotalPrice
 };
 

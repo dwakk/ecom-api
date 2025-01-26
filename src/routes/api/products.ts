@@ -6,6 +6,7 @@ const productRouter = Router();
 
 productRouter.get("/", productController.getAllProducts);
 
+productRouter.get("/search", productController.searchProduct);
 
 productRouter.get("/:id", productController.getProductInfo);
 

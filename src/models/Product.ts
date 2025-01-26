@@ -9,6 +9,8 @@ class Product extends Model<ProductAttributes> implements ProductAttributes {
     public category_id!: number;
     public description!: string;
     public thumbnail!: string;
+    public stock!: number;
+    public reserved!: number;
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
@@ -45,6 +47,14 @@ Product.init({
     },
     description: {
         type: DataTypes.STRING,
+        allowNull: false
+    },
+    stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    reserved: {
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 }, {

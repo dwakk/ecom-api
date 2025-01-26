@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import AppError from "../structures/AppError";
 import { handleError } from "../utils/handleError";
 import { cartService } from "./cart";
-import { Cart, CartProduct, Order, OrderProduct } from "../models";
+import { Cart, CartProduct, Order, OrderProduct, Product } from "../models";
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -101,6 +101,19 @@ async function completeOrder(orderId: string): Promise<true> {
         });
 
         await cart.destroy();
+
+        const orderProducts = await OrderProduct.findAll({
+            where: { order_id: order.id }
+        });
+        for (const orderProduct of orderProducts) {
+            const product = await Product.findByPk(orderProduct.product_id);
+            if (!product) {
+                throw new AppError('Product not found', 404, true);
+            }
+            product.stock -= orderProduct.quantity;
+            product.reserved += orderProduct.quantity;
+            await product.save();
+        }
 
         order.status = 'completed';
         order.cart_id = null;

@@ -27,8 +27,8 @@ async function getProductInfo(req: Request, res: Response, next: NextFunction) {
 }
 
 async function createProduct(req: Request, res: Response, next: NextFunction) {
-    const { product_name, price, category_id, description } = req.body;
-    if (!product_name || !price || !category_id || !description) {
+    const { product_name, price, category_id, description, stock } = req.body;
+    if (!product_name || !price || !category_id || !description || !stock) {
         return next(new AppError('All fields are required', 400, true));
     }
 
@@ -36,7 +36,9 @@ async function createProduct(req: Request, res: Response, next: NextFunction) {
         product_name,
         price,
         category_id,
-        description
+        description,
+        stock,
+        reserved: 0
     } as Product;
 
     try {
@@ -80,12 +82,27 @@ async function updateProduct(req: Request, res: Response, next: NextFunction) {
     }
 }
 
+async function searchProduct(req: Request, res: Response, next: NextFunction) {
+    const { keyword } = req.query;
+    if (!keyword || typeof keyword !== 'string') {
+        return next(new AppError('Keyword is required and must be a string', 400, true));
+    }
+    
+    try {
+        const products = await productService.searchProduct(keyword);
+        return res.json(products);
+    } catch (err) {
+        next(err);
+    }
+}
+
 const productController = {
     getAllProducts,
     getProductInfo,
     createProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    searchProduct
 };
 
 export { productController };

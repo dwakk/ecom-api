@@ -5,6 +5,8 @@ interface ProductAttributes {
     category_id: number;
     description: string;
     thumbnail: string;
+    stock: number;
+    reserved: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

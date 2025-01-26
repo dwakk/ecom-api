@@ -11,7 +11,7 @@ cartRouter.delete("/", authenticateJWT, setCart, cartController.clearCart);
 
 cartRouter.post("/products", authenticateJWT, setCart, cartController.addToCart);
 
-cartRouter.patch("/products", authenticateJWT, setCart, cartController.removeQuantity);
+cartRouter.patch("/products", authenticateJWT, setCart, cartController.editQuantity);
 
 cartRouter.delete("/products/:id", authenticateJWT, setCart, cartController.removeFromCart);
 
