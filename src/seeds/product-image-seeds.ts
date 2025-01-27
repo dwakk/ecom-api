@@ -28,21 +28,6 @@ const data: ProductImageAttributes[] = [
       "id": 5
     },
     {
-      "product_id": 6,
-      "url": "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/1.png",
-      "id": 6
-    },
-    {
-      "product_id": 6,
-      "url": "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/2.png",
-      "id": 7
-    },
-    {
-      "product_id": 6,
-      "url": "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/3.png",
-      "id": 8
-    },
-    {
       "product_id": 7,
       "url": "https://cdn.dummyjson.com/products/images/fragrances/Chanel%20Coco%20Noir%20Eau%20De/1.png",
       "id": 9
@@ -191,16 +176,6 @@ const data: ProductImageAttributes[] = [
       "product_id": 18,
       "url": "https://cdn.dummyjson.com/products/images/groceries/Cat%20Food/1.png",
       "id": 38
-    },
-    {
-      "product_id": 19,
-      "url": "https://cdn.dummyjson.com/products/images/groceries/Chicken%20Meat/1.png",
-      "id": 39
-    },
-    {
-      "product_id": 19,
-      "url": "https://cdn.dummyjson.com/products/images/groceries/Chicken%20Meat/2.png",
-      "id": 40
     },
     {
       "product_id": 20,
@@ -1263,36 +1238,6 @@ const data: ProductImageAttributes[] = [
       "id": 252
     },
     {
-      "product_id": 122,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%206/1.png",
-      "id": 253
-    },
-    {
-      "product_id": 122,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%206/2.png",
-      "id": 254
-    },
-    {
-      "product_id": 122,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%206/3.png",
-      "id": 255
-    },
-    {
-      "product_id": 123,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%2013%20Pro/1.png",
-      "id": 256
-    },
-    {
-      "product_id": 123,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%2013%20Pro/2.png",
-      "id": 257
-    },
-    {
-      "product_id": 123,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%2013%20Pro/3.png",
-      "id": 258
-    },
-    {
       "product_id": 124,
       "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%20X/1.png",
       "id": 259
@@ -1306,71 +1251,6 @@ const data: ProductImageAttributes[] = [
       "product_id": 124,
       "url": "https://cdn.dummyjson.com/products/images/smartphones/iPhone%20X/3.png",
       "id": 261
-    },
-    {
-      "product_id": 125,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20A57/1.png",
-      "id": 262
-    },
-    {
-      "product_id": 125,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20A57/2.png",
-      "id": 263
-    },
-    {
-      "product_id": 125,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20A57/3.png",
-      "id": 264
-    },
-    {
-      "product_id": 126,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20F19%20Pro%20Plus/1.png",
-      "id": 265
-    },
-    {
-      "product_id": 126,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20F19%20Pro%20Plus/2.png",
-      "id": 266
-    },
-    {
-      "product_id": 126,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20F19%20Pro%20Plus/3.png",
-      "id": 267
-    },
-    {
-      "product_id": 127,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20K1/1.png",
-      "id": 268
-    },
-    {
-      "product_id": 127,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20K1/2.png",
-      "id": 269
-    },
-    {
-      "product_id": 127,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20K1/3.png",
-      "id": 270
-    },
-    {
-      "product_id": 127,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20K1/4.png",
-      "id": 271
-    },
-    {
-      "product_id": 128,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Realme%20C35/1.png",
-      "id": 272
-    },
-    {
-      "product_id": 128,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Realme%20C35/2.png",
-      "id": 273
-    },
-    {
-      "product_id": 128,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Realme%20C35/3.png",
-      "id": 274
     },
     {
       "product_id": 129,
@@ -1401,96 +1281,6 @@ const data: ProductImageAttributes[] = [
       "product_id": 130,
       "url": "https://cdn.dummyjson.com/products/images/smartphones/Realme%20XT/3.png",
       "id": 280
-    },
-    {
-      "product_id": 131,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S7/1.png",
-      "id": 281
-    },
-    {
-      "product_id": 131,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S7/2.png",
-      "id": 282
-    },
-    {
-      "product_id": 131,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S7/3.png",
-      "id": 283
-    },
-    {
-      "product_id": 132,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/1.png",
-      "id": 284
-    },
-    {
-      "product_id": 132,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/2.png",
-      "id": 285
-    },
-    {
-      "product_id": 132,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/3.png",
-      "id": 286
-    },
-    {
-      "product_id": 133,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S10/1.png",
-      "id": 287
-    },
-    {
-      "product_id": 133,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S10/2.png",
-      "id": 288
-    },
-    {
-      "product_id": 133,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S10/3.png",
-      "id": 289
-    },
-    {
-      "product_id": 134,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20S1/1.png",
-      "id": 290
-    },
-    {
-      "product_id": 134,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20S1/2.png",
-      "id": 291
-    },
-    {
-      "product_id": 134,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20S1/3.png",
-      "id": 292
-    },
-    {
-      "product_id": 135,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20V9/1.png",
-      "id": 293
-    },
-    {
-      "product_id": 135,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20V9/2.png",
-      "id": 294
-    },
-    {
-      "product_id": 135,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20V9/3.png",
-      "id": 295
-    },
-    {
-      "product_id": 136,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20X21/1.png",
-      "id": 296
-    },
-    {
-      "product_id": 136,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20X21/2.png",
-      "id": 297
-    },
-    {
-      "product_id": 136,
-      "url": "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20X21/3.png",
-      "id": 298
     },
     {
       "product_id": 137,

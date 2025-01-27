@@ -83,13 +83,13 @@ async function updateProduct(req: Request, res: Response, next: NextFunction) {
 }
 
 async function searchProduct(req: Request, res: Response, next: NextFunction) {
-    const { keyword } = req.query;
-    if (!keyword || typeof keyword !== 'string') {
+    const { query } = req.query;
+    if (!query || typeof query !== 'string') {
         return next(new AppError('Keyword is required and must be a string', 400, true));
     }
     
     try {
-        const products = await productService.searchProduct(keyword);
+        const products = await productService.searchProduct(query);
         return res.json(products);
     } catch (err) {
         next(err);

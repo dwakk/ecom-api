@@ -63,18 +63,6 @@ const data: ProductAttributes[] = [
         reserved: 17,
     },
     {
-        id: 6,
-        product_name: "Calvin Klein CK One",
-        price: 49.99,
-        category_id: 2,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/thumbnail.png",
-        description:
-            "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
-        stock: 81,
-        reserved: 8,
-    },
-    {
         id: 7,
         product_name: "Chanel Coco Noir Eau De",
         price: 129.99,
@@ -104,7 +92,7 @@ const data: ProductAttributes[] = [
         price: 69.99,
         category_id: 2,
         thumbnail:
-            "https://cdn.dummyjson.com/products/images/fragrances/Dolce%20Shine%20Eau%20de/thumbnail.png",
+            "https://cdn.dummyjson.com/products/images/fragrances/Dolce%20Shine%20Eau%20de/1.png",
         description:
             "Dolce Shine by Dolce & Gabbana is a vibrant and fruity fragrance, featuring notes of mango, jasmine, and blonde woods. It's a joyful and youthful scent.",
         stock: 6,
@@ -217,18 +205,6 @@ const data: ProductAttributes[] = [
             "Nutritious cat food formulated to meet the dietary needs of your feline friend.",
         stock: 182,
         reserved: 45,
-    },
-    {
-        id: 19,
-        product_name: "Chicken Meat",
-        price: 9.99,
-        category_id: 4,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/groceries/Chicken%20Meat/thumbnail.png",
-        description:
-            "Fresh and tender chicken meat, suitable for various culinary preparations.",
-        stock: 139,
-        reserved: 9,
     },
     {
         id: 20,
@@ -1448,35 +1424,11 @@ const data: ProductAttributes[] = [
         price: 199.99,
         category_id: 14,
         thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/thumbnail.png",
+            "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/1.png",
         description:
             "The iPhone 5s is a classic smartphone known for its compact design and advanced features during its release. While it's an older model, it still provides a reliable user experience.",
         stock: 51,
         reserved: 4,
-    },
-    {
-        id: 122,
-        product_name: "iPhone 6",
-        price: 299.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/iPhone%206/thumbnail.png",
-        description:
-            "The iPhone 6 is a stylish and capable smartphone with a larger display and improved performance. It introduced new features and design elements, making it a popular choice in its time.",
-        stock: 48,
-        reserved: 30,
-    },
-    {
-        id: 123,
-        product_name: "iPhone 13 Pro",
-        price: 1099.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/iPhone%2013%20Pro/thumbnail.png",
-        description:
-            "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display. It offers advanced features for users who demand top-notch technology.",
-        stock: 78,
-        reserved: 23,
     },
     {
         id: 124,
@@ -1489,54 +1441,6 @@ const data: ProductAttributes[] = [
             "The iPhone X is a flagship smartphone featuring a bezel-less OLED display, facial recognition technology (Face ID), and impressive performance. It represents a milestone in iPhone design and innovation.",
         stock: 76,
         reserved: 17,
-    },
-    {
-        id: 125,
-        product_name: "Oppo A57",
-        price: 249.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20A57/thumbnail.png",
-        description:
-            "The Oppo A57 is a mid-range smartphone known for its sleek design and capable features. It offers a balance of performance and affordability, making it a popular choice.",
-        stock: 10,
-        reserved: 26,
-    },
-    {
-        id: 126,
-        product_name: "Oppo F19 Pro Plus",
-        price: 399.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20F19%20Pro%20Plus/thumbnail.png",
-        description:
-            "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities. It boasts advanced photography features and a powerful performance for a premium user experience.",
-        stock: 135,
-        reserved: 8,
-    },
-    {
-        id: 127,
-        product_name: "Oppo K1",
-        price: 299.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Oppo%20K1/thumbnail.png",
-        description:
-            "The Oppo K1 series offers a range of smartphones with various features and specifications. Known for their stylish design and reliable performance, the Oppo K1 series caters to diverse user preferences.",
-        stock: 40,
-        reserved: 46,
-    },
-    {
-        id: 128,
-        product_name: "Realme C35",
-        price: 149.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Realme%20C35/thumbnail.png",
-        description:
-            "The Realme C35 is a budget-friendly smartphone with a focus on providing essential features for everyday use. It offers a reliable performance and user-friendly experience.",
-        stock: 86,
-        reserved: 46,
     },
     {
         id: 129,
@@ -1561,78 +1465,6 @@ const data: ProductAttributes[] = [
             "The Realme XT is a feature-rich smartphone with a focus on camera technology. It comes equipped with advanced camera sensors, delivering high-quality photos and videos for photography enthusiasts.",
         stock: 62,
         reserved: 24,
-    },
-    {
-        id: 131,
-        product_name: "Samsung Galaxy S7",
-        price: 299.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S7/thumbnail.png",
-        description:
-            "The Samsung Galaxy S7 is a flagship smartphone known for its sleek design and advanced features. It features a high-resolution display, powerful camera, and robust performance.",
-        stock: 17,
-        reserved: 38,
-    },
-    {
-        id: 132,
-        product_name: "Samsung Galaxy S8",
-        price: 499.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S8/thumbnail.png",
-        description:
-            "The Samsung Galaxy S8 is a premium smartphone with an Infinity Display, offering a stunning visual experience. It boasts advanced camera capabilities and cutting-edge technology.",
-        stock: 61,
-        reserved: 48,
-    },
-    {
-        id: 133,
-        product_name: "Samsung Galaxy S10",
-        price: 699.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Samsung%20Galaxy%20S10/thumbnail.png",
-        description:
-            "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance. It represents innovation and excellence in smartphone technology.",
-        stock: 95,
-        reserved: 29,
-    },
-    {
-        id: 134,
-        product_name: "Vivo S1",
-        price: 249.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20S1/thumbnail.png",
-        description:
-            "The Vivo S1 is a stylish and mid-range smartphone offering a blend of design and performance. It features a vibrant display, capable camera system, and reliable functionality.",
-        stock: 84,
-        reserved: 45,
-    },
-    {
-        id: 135,
-        product_name: "Vivo V9",
-        price: 299.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20V9/thumbnail.png",
-        description:
-            "The Vivo V9 is a smartphone known for its sleek design and emphasis on capturing high-quality selfies. It features a notch display, dual-camera setup, and a modern design.",
-        stock: 30,
-        reserved: 12,
-    },
-    {
-        id: 136,
-        product_name: "Vivo X21",
-        price: 499.99,
-        category_id: 14,
-        thumbnail:
-            "https://cdn.dummyjson.com/products/images/smartphones/Vivo%20X21/thumbnail.png",
-        description:
-            "The Vivo X21 is a premium smartphone with a focus on cutting-edge technology. It features an in-display fingerprint sensor, a high-resolution display, and advanced camera capabilities.",
-        stock: 135,
-        reserved: 43,
     },
     {
         id: 137,
