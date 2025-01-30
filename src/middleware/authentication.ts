@@ -2,27 +2,27 @@ import jwt from 'jsonwebtoken';
 import { Account } from '../models';
 import { Request, Response, NextFunction } from 'express';
 import AppError from '../structures/AppError';
+import { authenticationService } from '../services/authentication';
 
 export async function authenticateJWT(req: Request, res: Response, next: NextFunction) {
     try {
-        const authorization = req.headers.authorization;
-
-        if (!authorization || !authorization.startsWith('Bearer ')) {
-            return next(new AppError('No authorization found', 401, true));
-        }
-
-        const token = authorization.split(' ')[1];
-
-        if (!token) {
+        const accessToken = req.cookies.accessToken;
+        if (!accessToken) {
             return next(new AppError('No token found', 401, true));
         }
 
+        if (await authenticationService.isTokenBlacklisted(accessToken)) {
+            return next(new AppError('Token is blacklisted', 401, true));
+        }
+
         try {
-            const payload = jwt.verify(token, process.env.JWT_SECRET!);
-            const account = await Account.findByPk((payload as jwt.JwtPayload).id);
+
+            const payload = jwt.verify(accessToken, process.env.JWT_SECRET!);
+            const account = await Account.findByPk((payload as jwt.JwtPayload).id, { attributes: { exclude: ['password'] } });
             if (!account) {
                 return next(new AppError('Invalid token', 401, true));
             }
+
             req.account = account;
         } catch (error) {
             return next(new AppError('Invalid token', 401, true));

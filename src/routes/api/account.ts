@@ -14,4 +14,6 @@ accountRouter.patch("/profile", authenticateJWT, accountController.updateAccount
 
 accountRouter.delete("/profile", authenticateJWT, accountController.deleteAccount);
 
+accountRouter.post("/logout", authenticateJWT, accountController.logoutAccount);
+
 export default accountRouter;
